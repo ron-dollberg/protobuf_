@@ -433,7 +433,7 @@ if __name__ == '__main__':
   install_requires = []
 
   setup(
-      name='protobuf_',
+      name='_protobuf',
       version=GetVersion(),
       description='Protocol Buffers',
       download_url='https://github.com/protocolbuffers/protobuf/releases',
