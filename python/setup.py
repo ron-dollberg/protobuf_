@@ -84,7 +84,7 @@ def GetVersion():
       The version.
   """
 
-  with open(os.path.join('google', 'protobuf_', '__init__.py')) as version_file:
+  with open(os.path.join('_google', 'protobuf', '__init__.py')) as version_file:
     exec(version_file.read(), globals())  # pylint:disable=exec-used
     return __version__  # pylint:disable=undefined-variable
 
@@ -142,29 +142,29 @@ def GenerateUnittestProtos():
   GenProto('../src/google/protobuf/unittest_proto3_arena.proto', False)
   GenProto('../src/google/protobuf/util/json_format.proto', False)
   GenProto('../src/google/protobuf/util/json_format_proto3.proto', False)
-  GenProto('google/protobuf/internal/any_test.proto', False)
-  GenProto('google/protobuf/internal/descriptor_pool_test1.proto', False)
-  GenProto('google/protobuf/internal/descriptor_pool_test2.proto', False)
-  GenProto('google/protobuf/internal/factory_test1.proto', False)
-  GenProto('google/protobuf/internal/factory_test2.proto', False)
-  GenProto('google/protobuf/internal/file_options_test.proto', False)
-  GenProto('google/protobuf/internal/import_test_package/import_public.proto',
+  GenProto('_google/protobuf/internal/any_test.proto', False)
+  GenProto('_google/protobuf/internal/descriptor_pool_test1.proto', False)
+  GenProto('_google/protobuf/internal/descriptor_pool_test2.proto', False)
+  GenProto('_google/protobuf/internal/factory_test1.proto', False)
+  GenProto('_google/protobuf/internal/factory_test2.proto', False)
+  GenProto('_google/protobuf/internal/file_options_test.proto', False)
+  GenProto('_google/protobuf/internal/import_test_package/import_public.proto',
            False)
   GenProto(
-      'google/protobuf/internal/import_test_package/import_public_nested.proto',
+      '_google/protobuf/internal/import_test_package/import_public_nested.proto',
       False)
-  GenProto('google/protobuf/internal/import_test_package/inner.proto', False)
-  GenProto('google/protobuf/internal/import_test_package/outer.proto', False)
-  GenProto('google/protobuf/internal/missing_enum_values.proto', False)
-  GenProto('google/protobuf/internal/message_set_extensions.proto', False)
-  GenProto('google/protobuf/internal/more_extensions.proto', False)
-  GenProto('google/protobuf/internal/more_extensions_dynamic.proto', False)
-  GenProto('google/protobuf/internal/more_messages.proto', False)
-  GenProto('google/protobuf/internal/no_package.proto', False)
-  GenProto('google/protobuf/internal/packed_field_test.proto', False)
-  GenProto('google/protobuf/internal/test_bad_identifiers.proto', False)
-  GenProto('google/protobuf/internal/test_proto3_optional.proto', False)
-  GenProto('google/protobuf/pyext/python.proto', False)
+  GenProto('_google/protobuf/internal/import_test_package/inner.proto', False)
+  GenProto('_google/protobuf/internal/import_test_package/outer.proto', False)
+  GenProto('_google/protobuf/internal/missing_enum_values.proto', False)
+  GenProto('_google/protobuf/internal/message_set_extensions.proto', False)
+  GenProto('_google/protobuf/internal/more_extensions.proto', False)
+  GenProto('_google/protobuf/internal/more_extensions_dynamic.proto', False)
+  GenProto('_google/protobuf/internal/more_messages.proto', False)
+  GenProto('_google/protobuf/internal/no_package.proto', False)
+  GenProto('_google/protobuf/internal/packed_field_test.proto', False)
+  GenProto('_google/protobuf/internal/test_bad_identifiers.proto', False)
+  GenProto('_google/protobuf/internal/test_proto3_optional.proto', False)
+  GenProto('_google/protobuf/pyext/python.proto', False)
 
 
 class CleanCmd(_clean):
@@ -207,9 +207,9 @@ class BuildPyCmd(_build_py):
   def find_package_modules(self, package, package_dir):
     exclude = (
         '*test*',
-        'google/protobuf/internal/*_pb2.py',
-        'google/protobuf/internal/_parameterized.py',
-        'google/protobuf/pyext/python_pb2.py',
+        '_google/protobuf/internal/*_pb2.py',
+        '_google/protobuf/internal/_parameterized.py',
+        '_google/protobuf/pyext/python_pb2.py',
     )
     modules = _build_py.find_package_modules(self, package, package_dir)
     return [(pkg, mod, fil) for (pkg, mod, fil) in modules
@@ -410,8 +410,8 @@ if __name__ == '__main__':
     # C++ implementation extension
     ext_module_list.extend([
         Extension(
-            'google.protobuf_.pyext._message',
-            glob.glob('google/protobuf/pyext/*.cc'),
+            '_google.protobuf.pyext._message',
+            glob.glob('_google/protobuf/pyext/*.cc'),
             include_dirs=['.', '../src', '../third_party/abseil-cpp'],
             libraries=libraries,
             extra_objects=extra_objects,
@@ -420,8 +420,8 @@ if __name__ == '__main__':
             extra_compile_args=extra_compile_args,
         ),
         Extension(
-            'google.protobuf_.internal._api_implementation',
-            glob.glob('google/protobuf/internal/api_implementation.cc'),
+            '_google.protobuf.internal._api_implementation',
+            glob.glob('_google/protobuf/internal/api_implementation.cc'),
             extra_compile_args=(extra_compile_args +
                                 ['-DPYTHON_PROTO2_CPP_IMPL_V2']),
             extra_link_args=api_implementation_link_args,
@@ -453,13 +453,13 @@ if __name__ == '__main__':
           'Programming Language :: Python :: 3.9',
           'Programming Language :: Python :: 3.10',
       ],
-      namespace_packages=['google'],
+      namespace_packages=['_google'],
       packages=find_packages(
           exclude=[
               'import_test_package',
-              'protobuf_distutils',
+              'protobufdistutils',
           ],),
-      test_suite='google.protobuf_.internal',
+      test_suite='_google.protobuf.internal',
       cmdclass={
           'clean': CleanCmd,
           'build_py': BuildPyCmd,
