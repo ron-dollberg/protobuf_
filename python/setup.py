@@ -410,7 +410,7 @@ if __name__ == '__main__':
     # C++ implementation extension
     ext_module_list.extend([
         Extension(
-            'google.protobuf.pyext._message',
+            'google.protobuf_.pyext._message',
             glob.glob('google/protobuf/pyext/*.cc'),
             include_dirs=['.', '../src', '../third_party/abseil-cpp'],
             libraries=libraries,
@@ -420,7 +420,7 @@ if __name__ == '__main__':
             extra_compile_args=extra_compile_args,
         ),
         Extension(
-            'google.protobuf.internal._api_implementation',
+            'google.protobuf_.internal._api_implementation',
             glob.glob('google/protobuf/internal/api_implementation.cc'),
             extra_compile_args=(extra_compile_args +
                                 ['-DPYTHON_PROTO2_CPP_IMPL_V2']),
@@ -459,7 +459,7 @@ if __name__ == '__main__':
               'import_test_package',
               'protobuf_distutils',
           ],),
-      test_suite='google.protobuf.internal',
+      test_suite='google.protobuf_.internal',
       cmdclass={
           'clean': CleanCmd,
           'build_py': BuildPyCmd,
