@@ -84,7 +84,7 @@ def GetVersion():
       The version.
   """
 
-  with open(os.path.join('google', 'protobuf', '__init__.py')) as version_file:
+  with open(os.path.join('google', 'protobuf_', '__init__.py')) as version_file:
     exec(version_file.read(), globals())  # pylint:disable=exec-used
     return __version__  # pylint:disable=undefined-variable
 
